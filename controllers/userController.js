@@ -37,8 +37,9 @@ class UserController {
                 }
             })
             .then(loggedUser => {
-                const token = jwt.sign(createdUser.email, process.env.JWT_SECRET)
+                const token = jwt.sign(loggedUser.email, process.env.JWT_SECRET)
             })
+            .catch(next)
     }
 }
 
