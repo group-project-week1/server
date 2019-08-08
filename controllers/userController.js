@@ -2,22 +2,21 @@ const { OAuth2Client } = require('google-auth-library')
 const client = new OAuth2Client(process.env.CLIENT_ID)
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const axios = require('axios')
 
 const User = require('../model/user')
 
 class UserController {
     static googleSignIn (req, res, next) {
-        const client = new OAuth2Client(process.env.CLIENT_ID)
         let user = {}
         client.verifyIdToken({
-            idToken: req.body.idToken,
+            idToken: req.body.id_token,
             audience: process.env.CLIENT_ID
         })
             .then(ticket => {
-                user.name = ticket.payload().name
-                user.email = ticket.payload().email
-                user.picture = ticket.payload().picture
+                console.log(ticket)
+                user.name = ticket.getPayload().name
+                user.email = ticket.getPayload().email
+                user.picture = ticket.getPayload().picture
 
                 return User.findOne({mail: user.mail})
             })
@@ -38,6 +37,8 @@ class UserController {
             })
             .then(loggedUser => {
                 const token = jwt.sign(loggedUser.email, process.env.JWT_SECRET)
+                const {name, email, picture} = user
+                res.json({name, email, picture, token})
             })
             .catch(next)
     }
