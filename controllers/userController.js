@@ -2,6 +2,7 @@ const { OAuth2Client } = require('google-auth-library')
 const client = new OAuth2Client(process.env.CLIENT_ID)
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const axios = require('axios')
 
 const User = require('../model/user')
 
@@ -39,6 +40,15 @@ class UserController {
                 const token = jwt.sign(loggedUser.email, process.env.JWT_SECRET)
                 const {name, email, picture} = user
                 res.json({name, email, picture, token})
+            })
+            .catch(next)
+    }
+
+    static githubSignIn(req, res, next) {
+        axios.get(`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&redirect_uri=http://localhost:8080`)
+            .then( accessCode => {
+                // let loginPage = encodeURIComponent(accessCode.request.res.responseUrl)
+                res.send(accessCode.request.res.responseUrl)
             })
             .catch(next)
     }

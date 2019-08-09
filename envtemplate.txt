@@ -1,0 +1,15 @@
+UNSPLASH_TOKEN = "aabfb666f862ea159f9f3096016327a9c41c3a7bfa7e887e67395e5d05d63e2a"
+
+JWT_SECRET=HaveYouHeardTheTragedyOfDarthPlagueisTheWise
+
+
+AIRVISUAL_KEY=dcbff0f5-0e03-42c7-8ec1-3c8a452ab916
+
+PASSWORD=FlashSaleTokopediaTinggal2HariLagi
+
+CLIENT_ID=583006918731-3np4gbiqndhphdgfl4gqbqoejpuv4avu.apps.googleusercontent.com
+
+CLIENT_SECRET=hhM9og5h0Wz2TZpTs2gL0tA_ 
+
+GITHUB_CLIENT_ID=8adb88e896eb80dedde2
+GITHUB_CLIENT_SECRET=4243362deea313fa884f08ddfaa16ba8891b05f5

@@ -1,6 +1,6 @@
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
@@ -28,4 +28,15 @@ function onSignIn(googleUser) {
         localStorage.removeItem('token')
       console.log('User signed out.');
     });
+  }
+
+  function githubSignIn() {
+      $.ajax({
+         url: 'http://localhost:3000/user/github-sign-in',
+         type:'GET'
+      })
+        .done((getUrl) => {
+            console.log(getUrl)
+            window.location.href = getUrl
+        })
   }
