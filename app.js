@@ -19,10 +19,15 @@ app.use('/images', unsplashRouter)
 app.use('/weathers', weatherRouter)
 
 app.use((err, req, res, next) => {
-    console.log(err)
-    res.status(500).json({
-        message: err.message
-    })
+    if (err.response.data.message === 'city not found') {
+        res.json({
+            message: err.response.data.message
+        })
+    } else {
+        res.json({
+            message: err.message
+        })
+    }
 })
 
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
