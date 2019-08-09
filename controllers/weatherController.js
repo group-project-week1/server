@@ -21,7 +21,7 @@ class WeatherController {
             // res.json(aqi)
             outputData.pollution = {}
             outputData.pollution.nearest_city = aqi.data.data.city
-            outputData.pollution.aqi = aqi.data.data.current.pollution.aqicn
+            outputData.pollution.aqi = aqi.data.data.current.pollution.aqius
             outputData.pollution.status = aqiStatus(outputData.pollution.aqi)
             // res.json(outputData)
             let query = outputData.weather[0].main
@@ -31,7 +31,12 @@ class WeatherController {
         .then((result) => {
             outputData.image = result.data.urls.regular
             outputData.temp = converter(outputData.main.temp).toFixed(0)
-            res.status(200).json(outputData)
+            // res.status(200).json(outputData)
+            return axios.get(`https://api.unsplash.com/photos/random?page=1&orientation=landscape&query=${city} city`, {headers: {Authorization: 'Client-ID ' + process.env.UNSPLASH_TOKEN}})
+         })
+         .then((cityname) => {
+             outputData.urlCity = cityname.data.urls.regular
+             res.status(200).json(outputData)
          })
         .catch(next)
     }

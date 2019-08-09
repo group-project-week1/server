@@ -11,19 +11,19 @@ function aqiStatus(aqi) {
             color: "#51ff00",
             health_implications: "A level that may have a meager impact on patients in case of chronic exposure. "
         }
-    } else if (aqi <= 150) {
+    } else if (aqi <= 200) {
         return {
             status: "Unhealthy for sensitive groups",
             color: "#ecff00",
             health_implications: "A level that may have harmful impacts on patients and members of sensitive groups. "
         }
-    } else if( aqi <= 200) {
+    } else if( aqi <= 300) {
         return {
             status: "Unhealthy",
             color: '#ffae00',
             health_implications: "A level that may have harmful impacts on patients and members of sensitive groups (children, aged or weak people), and also cause the general public unpleasant feelings. "
         }
-    } else if( aqi <= 300) {
+    } else if( aqi <= 400) {
         return {
             status: "Very Unhealthy",
             color: '#ff4200',
