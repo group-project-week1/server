@@ -19,7 +19,7 @@ app.use('/images', unsplashRouter)
 app.use('/weathers', weatherRouter)
 
 app.use((err, req, res, next) => {
-    console.log(err.message)
+    console.log(err)
     res.status(500).json({
         message: err.message
     })

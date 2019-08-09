@@ -36,6 +36,11 @@ function onSignIn(googleUser) {
          type:'GET'
       })
         .done((getUrl) => {
+
+            $.ajax({
+                url: getUrl,
+                type: 'POST'
+            })
             console.log(getUrl)
             window.location.href = getUrl
         })
