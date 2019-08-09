@@ -1,5 +1,6 @@
 const axios = require('axios')
 const aqiStatus = require('../helpers/aqiStatus')
+const converter = require('../helpers/tempConverter')
 
 class WeatherController {
     static getWeather(req, res, next) {
@@ -22,8 +23,16 @@ class WeatherController {
             outputData.pollution.nearest_city = aqi.data.data.city
             outputData.pollution.aqi = aqi.data.data.current.pollution.aqicn
             outputData.pollution.status = aqiStatus(outputData.pollution.aqi)
-            res.json(outputData)
+            // res.json(outputData)
+            let query = outputData.weather[0].main
+            return axios.get(`https://api.unsplash.com/search/photos?page=1&orientation=landscape&query=${query} sky`, {headers: {Authorization: 'Client-ID ' + process.env.UNSPLASH_TOKEN}})
+            
         })
+        .then((result) => {
+            outputData.image = result.data.results[0].urls.regular
+            outputData.temp = converter(outputData.main.temp).toFixed(0)
+            res.status(200).json(outputData)
+         })
         .catch(next)
     }
 }

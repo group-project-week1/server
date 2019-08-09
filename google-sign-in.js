@@ -32,16 +32,11 @@ function onSignIn(googleUser) {
 
   function githubSignIn() {
       $.ajax({
-         url: 'http://localhost:3000/user/github-sign-in',
-         type:'GET'
+         url: 'https://github.com/login/oauth/authorize?client_id=8adb88e896eb80dedde2&redirect_uri=http://localhost:8080',
+         type:'GET',
+
       })
         .done((getUrl) => {
-
-            $.ajax({
-                url: getUrl,
-                type: 'POST'
-            })
             console.log(getUrl)
-            window.location.href = getUrl
         })
   }
