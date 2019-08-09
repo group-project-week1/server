@@ -7,7 +7,7 @@ class WeatherController {
         let { city } = req.params
         let outputData = {}
         outputData.city = req.params.city
-        let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=70ad314ffdc6ad72a7adfeec014161a3`
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPENWEATHER_TOKEN}`
         axios.get(url)
         .then(({data}) => {
             let longitude = data.coord.lon
