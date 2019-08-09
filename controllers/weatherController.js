@@ -1,4 +1,5 @@
 const axios = require('axios')
+const aqiStatus = require('../helpers/aqiStatus')
 
 class WeatherController {
     static getWeather(req, res, next) {
@@ -20,6 +21,7 @@ class WeatherController {
             outputData.pollution = {}
             outputData.pollution.nearest_city = aqi.data.data.city
             outputData.pollution.aqi = aqi.data.data.current.pollution.aqicn
+            outputData.pollution.status = aqiStatus(outputData.pollution.aqi)
             res.json(outputData)
         })
         .catch(next)
