@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const unsplashController = require('../controllers/unsplashController')
 
-router.get('/search/:query', unsplashController.getImage)
+router.get('/:city', unsplashController.getImage)
 
 module.exports = router
